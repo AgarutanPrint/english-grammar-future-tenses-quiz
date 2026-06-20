@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master English Grammar: Future Tenses Quiz</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #e8f4f8 0%, #f0f7ee 100%);
+    min-height: 100vh;
+    padding: 16px;
+  }
+  .card {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+    overflow: hidden;
+  }
+
+  /* ── MENU ── */
+  #menu { padding: 32px 24px 28px; text-align: center; }
+  #menu .book-title { font-size: 13px; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  #menu h1 { font-size: 22px; font-weight: 800; color: #1a1a2e; margin-bottom: 6px; line-height: 1.3; }
+  #menu .subtitle { font-size: 13px; color: #666; margin-bottom: 24px; }
+  .menu-btn {
+    display: flex; align-items: center; gap: 12px;
+    width: 100%; padding: 14px 18px; margin-bottom: 10px;
+    background: #f7f9fb; border: 2px solid #e2e8f0;
+    border-radius: 14px; cursor: pointer; text-align: left;
+    transition: all .18s; font-size: 15px; font-weight: 600; color: #1a1a2e;
+  }
+  .menu-btn:hover { background: #eef6ff; border-color: #4a90d9; transform: translateY(-1px); }
+  .menu-btn .icon { font-size: 22px; flex-shrink: 0; }
+  .menu-btn .ch-label { font-size: 11px; color: #888; font-weight: 500; display: block; margin-bottom: 1px; }
+
+  /* ── QUIZ HEADER ── */
+  #quiz-header {
+    padding: 14px 18px 10px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  #quiz-header .ch-name { font-size: 12px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: .8px; }
+  #quiz-header h2 { font-size: 17px; font-weight: 800; color: #1a1a2e; margin-top: 2px; }
+  .progress-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+  .progress-bar { flex: 1; height: 6px; background: #e8edf2; border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #4a90d9, #7bc8a4); border-radius: 99px; transition: width .4s; }
+  .progress-text { font-size: 12px; color: #888; white-space: nowrap; }
+
+  /* ── QUESTION AREA ── */
+  #question-area { padding: 18px 18px 10px; }
+  #question-text {
+    font-size: 16px; font-weight: 700; color: #1a1a2e;
+    line-height: 1.5; margin-bottom: 16px; min-height: 48px;
+  }
+  .option-btn {
+    display: block; width: 100%; padding: 12px 16px; margin-bottom: 9px;
+    background: #f7f9fb; border: 2px solid #e2e8f0;
+    border-radius: 12px; cursor: pointer; text-align: left;
+    font-size: 14px; color: #1a1a2e; font-weight: 500;
+    transition: all .15s; line-height: 1.4;
+  }
+  .option-btn:hover:not(:disabled) { background: #eef6ff; border-color: #4a90d9; }
+  .option-btn.correct { background: #e8f8ee; border-color: #34c16f; color: #1a5c33; }
+  .option-btn.wrong { background: #fef0f0; border-color: #f05252; color: #7b2020; }
+  .option-btn:disabled { cursor: default; }
+
+  /* ── FEEDBACK ── */
+  #feedback {
+    margin: 4px 18px 0; padding: 10px 14px;
+    border-radius: 10px; font-size: 13px; font-weight: 600;
+    display: none;
+  }
+  #feedback.correct { background: #e8f8ee; color: #1a5c33; }
+  #feedback.wrong { background: #fef0f0; color: #7b2020; }
+
+  /* ── HINT ── */
+  #hint-area { padding: 8px 18px 0; }
+  #hint-btn {
+    background: none; border: 1.5px dashed #b0b8c4; color: #7a869a;
+    border-radius: 10px; padding: 7px 14px; font-size: 13px;
+    cursor: pointer; display: flex; align-items: center; gap: 6px;
+    transition: all .15s;
+  }
+  #hint-btn:hover { border-color: #f59e0b; color: #b45309; background: #fffbeb; }
+  #hint-text {
+    margin-top: 8px; padding: 10px 14px;
+    background: #fffbeb; border-radius: 10px;
+    font-size: 13px; color: #92400e; display: none; line-height: 1.5;
+  }
+
+  /* ── NEXT BTN ── */
+  #next-btn {
+    margin: 14px 18px 18px; display: none;
+    width: calc(100% - 36px); padding: 13px;
+    background: linear-gradient(90deg, #4a90d9, #7bc8a4);
+    color: #fff; border: none; border-radius: 14px;
+    font-size: 16px; font-weight: 700; cursor: pointer;
+    transition: opacity .15s;
+  }
+  #next-btn:hover { opacity: .9; }
+
+  /* ── EXIT BTN ── */
+  #exit-btn {
+    margin: 0 18px 14px; width: calc(100% - 36px);
+    padding: 10px; background: none; color: #aaa;
+    border: 1.5px solid #e2e8f0; border-radius: 12px;
+    font-size: 14px; cursor: pointer; display: none;
+    transition: all .15s;
+  }
+  #exit-btn:hover { border-color: #f05252; color: #f05252; }
+
+  /* ── STATS ROW ── */
+  #stats-row {
+    display: flex; justify-content: space-around;
+    padding: 10px 18px; border-top: 1px solid #f0f0f0;
+    background: #fafbfc;
+  }
+  .stat { text-align: center; }
+  .stat .val { font-size: 18px; font-weight: 800; color: #1a1a2e; }
+  .stat .lbl { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: .6px; }
+
+  /* ── END SCREEN ── */
+  #end-screen { padding: 28px 24px 24px; text-align: center; display: none; }
+  #end-trophy { font-size: 56px; margin-bottom: 8px; }
+  #stars-row { display: flex; justify-content: center; gap: 6px; margin-bottom: 14px; min-height: 36px; }
+  .star { font-size: 28px; opacity: 0; transform: scale(.5); transition: all .4s; }
+  .star.pop { opacity: 1; transform: scale(1); }
+  #end-title { font-size: 22px; font-weight: 900; color: #1a1a2e; margin-bottom: 6px; }
+  #end-subtitle { font-size: 14px; color: #666; margin-bottom: 18px; }
+  .pill-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+  .pill {
+    padding: 8px 16px; border-radius: 99px; font-size: 13px; font-weight: 700;
+    background: #f0f7ff; color: #1a4a8a;
+  }
+  .pill.green { background: #e8f8ee; color: #1a5c33; }
+  .pill.red { background: #fef0f0; color: #7b2020; }
+  .pill.gold { background: #fffbeb; color: #92400e; }
+
+  #end-actions { display: flex; gap: 10px; margin-bottom: 18px; }
+  .end-btn {
+    flex: 1; padding: 12px; border-radius: 14px; font-size: 14px;
+    font-weight: 700; cursor: pointer; border: none; transition: all .15s;
+  }
+  #retry-btn { background: linear-gradient(90deg,#4a90d9,#7bc8a4); color: #fff; }
+  #menu-btn-end { background: #f7f9fb; color: #1a1a2e; border: 2px solid #e2e8f0; }
+  #retry-btn:hover, #menu-btn-end:hover { opacity: .85; }
+
+  /* review box */
+  .review-box {
+    background: #f7f9fb; border: 2px solid #e2e8f0;
+    border-radius: 16px; padding: 16px; text-align: left;
+    margin-top: 4px; display: none;
+  }
+  .review-badge {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    background: #e8f0ff; color: #2a4a9a; padding: 3px 10px;
+    border-radius: 99px; margin-bottom: 8px;
+  }
+  .review-heading { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
+  .review-body { font-size: 12px; color: #555; line-height: 1.5; margin-bottom: 12px; }
+  .review-btn {
+    display: block; padding: 11px 14px; border-radius: 12px;
+    font-size: 13px; font-weight: 700; text-align: center;
+    text-decoration: none; color: #fff; margin-bottom: 8px;
+    background: linear-gradient(90deg,#f7971e,#ffd200); color: #1a1a2e;
+    transition: opacity .15s;
+  }
+  .review-btn:hover { opacity: .88; }
+
+  /* review section */
+  #review-section { text-align: left; display: none; }
+  #review-section h3 { font-size: 14px; font-weight: 800; color: #1a1a2e; margin-bottom: 12px; }
+  .review-item { margin-bottom: 14px; padding: 12px; border-radius: 12px; font-size: 13px; }
+  .review-item.wrong-item { background: #fef0f0; }
+  .review-item .q-text { font-weight: 600; color: #1a1a2e; margin-bottom: 4px; }
+  .review-item .your-ans { color: #c0392b; }
+  .review-item .correct-ans { color: #27ae60; }
+
+  /* encouraging end screen */
+  #encourage-icon { font-size: 56px; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<!-- MENU -->
+<div class="card" id="menu">
+  <div class="book-title">Agarutan Print</div>
+  <h1>Master English Grammar:<br>Future Tenses</h1>
+  <p class="subtitle">Choose a chapter to begin your quiz 🎯</p>
+
+  <button class="menu-btn" onclick="startSection(0)">
+    <span class="icon">🔮</span>
+    <span>
+      <span class="ch-label">Chapter 1</span>
+      The Simple Future Tense
+    </span>
+  </button>
+  <button class="menu-btn" onclick="startSection(1)">
+    <span class="icon">🎯</span>
+    <span>
+      <span class="ch-label">Chapter 2</span>
+      Future with "Going to"
+    </span>
+  </button>
+  <button class="menu-btn" onclick="startSection(2)">
+    <span class="icon">⏳</span>
+    <span>
+      <span class="ch-label">Chapter 3</span>
+      Future Continuous Tense
+    </span>
+  </button>
+  <button class="menu-btn" onclick="startSection(3)">
+    <span class="icon">✅</span>
+    <span>
+      <span class="ch-label">Chapter 4</span>
+      Future Perfect Tense
+    </span>
+  </button>
+  <button class="menu-btn" onclick="startSection(4)">
+    <span class="icon">🔄</span>
+    <span>
+      <span class="ch-label">Chapter 5</span>
+      Future Perfect Continuous Tense
+    </span>
+  </button>
+  <button class="menu-btn" onclick="startSection(5)">
+    <span class="icon">🏆</span>
+    <span>
+      <span class="ch-label">Final</span>
+      Mastery Test
+    </span>
+  </button>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div class="card" id="quiz-screen" style="display:none;">
+  <div id="quiz-header">
+    <div class="ch-name" id="ch-name-label"></div>
+    <h2 id="ch-title-label"></h2>
+    <div class="progress-row">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-text" id="progress-text"></div>
+    </div>
+  </div>
+
+  <div id="question-area">
+    <div id="question-text"></div>
+    <div id="options-container"></div>
+  </div>
+
+  <div id="feedback"></div>
+  <div id="hint-area">
+    <button id="hint-btn" onclick="showHint()">💡 Use Hint <small>(−5 pts if correct)</small></button>
+    <div id="hint-text"></div>
+  </div>
+
+  <button id="next-btn" onclick="nextQuestion()">Next →</button>
+  <button id="exit-btn" onclick="exitToMenu()">← Back to Menu</button>
+
+  <div id="stats-row">
+    <div class="stat"><div class="val" id="stat-pts">0</div><div class="lbl">Points</div></div>
+    <div class="stat"><div class="val" id="stat-correct">0</div><div class="lbl">✅ Correct</div></div>
+    <div class="stat"><div class="val" id="stat-wrong">0</div><div class="lbl">❌ Wrong</div></div>
+    <div class="stat"><div class="val" id="stat-score">0%</div><div class="lbl">🎯 Score</div></div>
+  </div>
+</div>
+
+<!-- END SCREEN -->
+<div class="card" id="end-screen" style="display:none;">
+  <div id="end-trophy"></div>
+  <div id="stars-row"></div>
+  <div id="end-title"></div>
+  <div id="end-subtitle"></div>
+  <div class="pill-row">
+    <div class="pill gold" id="pill-pts"></div>
+    <div class="pill green" id="pill-correct"></div>
+    <div class="pill red" id="pill-wrong"></div>
+    <div class="pill" id="pill-pct"></div>
+  </div>
+  <div id="end-actions">
+    <button class="end-btn" id="retry-btn" onclick="retryCurrent()">🔄 Try Again</button>
+    <button class="end-btn" id="menu-btn-end" onclick="goMenu()">🏠 Menu</button>
+  </div>
+
+  <!-- Review box (wrong answers) shown only ≥70% -->
+  <div id="review-section">
+    <h3>📋 Review Your Wrong Answers</h3>
+    <div id="review-items"></div>
+  </div>
+
+  <!-- Etsy/Amazon review box -->
+  <div class="review-box" id="review-box">
+    <span class="review-badge">🔒 Notice: For Parents &amp; Educators</span>
+    <div class="review-heading">How did you like this complete resource bundle?</div>
+    <div class="review-body">
+      Thank you for choosing <strong>Agarutan Print</strong>! We hope this
+      combination of printable worksheets, the digital fillable PDF, and the
+      interactive quiz bonus is helping to build your student's skills. If this
+      resource bundle added value to your student's learning experience, please
+      take a brief moment to share your feedback. Your review helps us continue
+      creating high-quality learning assets!
+    </div>
+    <div id="review-buttons"></div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   QUESTION DATA  (5 chapters × 12 questions + mastery 15)
+═══════════════════════════════════════════════════════ */
+
+const SECTIONS = [
+
+  /* ── CH 1: Simple Future ── */
+  {
+    chLabel: "Chapter 1",
+    title: "The Simple Future Tense",
+    questions: [
+      {
+        q: "What is the correct structure for the Simple Future Tense?",
+        opts: ["Subject + was + base verb", "Subject + will + base verb", "Subject + is + verb-ing", "Subject + have + past participle"],
+        ans: 1,
+        hint: "Think of 'will' as the key helper verb in this tense."
+      },
+      {
+        q: "Which sentence uses the Simple Future correctly?",
+        opts: ["She wills visit her grandmother.", "She will visited her grandmother.", "She will visit her grandmother next week.", "She visiting her grandmother next week."],
+        ans: 2,
+        hint: "The base verb never changes in the Simple Future."
+      },
+      {
+        q: "Which time expression is commonly used with the Simple Future?",
+        opts: ["Yesterday", "Last month", "Since 2010", "Tomorrow"],
+        ans: 3,
+        hint: "Simple Future points to upcoming actions, not past ones."
+      },
+      {
+        q: "How do you form a question in the Simple Future Tense?",
+        opts: ["Subject + will + base verb?", "Will + subject + base verb?", "Does + subject + will + verb?", "Be + subject + base verb?"],
+        ans: 1,
+        hint: "Invert 'will' and the subject to make a question."
+      },
+      {
+        q: "Which sentence is a correct negative in the Simple Future?",
+        opts: ["They not will go.", "They will not go.", "They won't going.", "They not going to go."],
+        ans: 1,
+        hint: "'Will not' or 'won't' — the base verb stays the same."
+      },
+      {
+        q: "Choose the correct short answer: 'Will you help me?' — ___",
+        opts: ["Yes, I do.", "Yes, I am.", "Yes, I will.", "Yes, I can."],
+        ans: 2,
+        hint: "Short answers echo the auxiliary verb used in the question."
+      },
+      {
+        q: "Which verb form is correct after 'will'?",
+        opts: ["studies", "studied", "study", "studying"],
+        ans: 2,
+        hint: "After 'will', always use the base (infinitive) form of the verb."
+      },
+      {
+        q: "The Simple Future is used to express ___ made at the moment of speaking.",
+        opts: ["Past habits", "Ongoing actions", "Spontaneous decisions", "Completed actions"],
+        ans: 2,
+        hint: "Think: you didn't plan it — you just decided right now!"
+      },
+      {
+        q: "Rearrange: (won't / they / tomorrow / work) → Correct sentence?",
+        opts: ["They work won't tomorrow.", "They tomorrow won't work.", "They won't work tomorrow.", "Won't they work tomorrow."],
+        ans: 2,
+        hint: "Subject comes before 'won't', then the base verb."
+      },
+      {
+        q: "Which is the correct negative short answer to 'Will it rain?'",
+        opts: ["No, it isn't.", "No, it won't.", "No, it doesn't.", "No, it not will."],
+        ans: 1,
+        hint: "Use 'won't' as the negative short answer with 'will' questions."
+      },
+      {
+        q: "Choose the Simple Future sentence used for making a PROMISE:",
+        opts: ["It will rain tomorrow.", "I will call you later.", "She will be a great singer.", "I'm thirsty."],
+        ans: 1,
+        hint: "Promises are commitments you make to someone about the future."
+      },
+      {
+        q: "Which sentence correctly spells the verb in the Simple Future?",
+        opts: ["He will goes to the market.", "He will went to the market.", "He will going to the market.", "He will go to the market."],
+        ans: 3,
+        hint: "No endings like -s, -ed, or -ing are added after 'will'."
+      },
+    ]
+  },
+
+  /* ── CH 2: Going To ── */
+  {
+    chLabel: "Chapter 2",
+    title: "Future with \"Going to\"",
+    questions: [
+      {
+        q: "What is the correct structure for the 'Going to' future?",
+        opts: ["Subject + will + going to + verb", "Subject + am/is/are + going to + base verb", "Subject + going to + base verb", "Subject + to be going + verb-ing"],
+        ans: 1,
+        hint: "The correct form of 'be' (am/is/are) must match the subject."
+      },
+      {
+        q: "Which sentence uses 'going to' correctly?",
+        opts: ["I am go to watch a movie.", "I going to watch a movie tonight.", "I am going to watch a movie tonight.", "I will going to watch a movie."],
+        ans: 2,
+        hint: "Subject + am/is/are + going to + base verb."
+      },
+      {
+        q: "'Going to' is used to talk about predictions based on ___.",
+        opts: ["Future wishes", "Past evidence", "Present evidence", "Wild guesses"],
+        ans: 2,
+        hint: "You can SEE something is about to happen right now."
+      },
+      {
+        q: "How do you form a question with 'going to'?",
+        opts: ["Will + subject + going to + verb?", "Am/Is/Are + subject + going to + base verb?", "Subject + going to + verb?", "Do/Does + subject + go to + verb?"],
+        ans: 1,
+        hint: "Invert the be-verb and subject, then add 'going to' + base verb."
+      },
+      {
+        q: "Which negative 'going to' sentence is correct?",
+        opts: ["She is not going to watch the movie.", "She not going to watch the movie.", "She going to not watch the movie.", "She won't going to watch the movie."],
+        ans: 0,
+        hint: "Place 'not' after am/is/are: 'is not going to'."
+      },
+      {
+        q: "Choose the correct short answer: 'Is she going to travel abroad?' — ___",
+        opts: ["Yes, she will.", "Yes, she is.", "Yes, she does.", "Yes, she going."],
+        ans: 1,
+        hint: "Short answers repeat the be-verb: 'Yes, she is.'"
+      },
+      {
+        q: "'Look at those clouds! It ___ rain.' — Best form?",
+        opts: ["will", "is going to", "has been", "would"],
+        ans: 1,
+        hint: "Dark clouds = present evidence → 'going to' prediction."
+      },
+      {
+        q: "Which best uses 'going to' to express a PLAN?",
+        opts: ["I will get some water. I'm thirsty.", "I am going to study medicine after high school.", "It will rain tomorrow.", "He will be a great singer."],
+        ans: 1,
+        hint: "'Going to' = already decided plan vs spontaneous 'will' decision."
+      },
+      {
+        q: "Rearrange: (she / tonight / cook / to / going / dinner / is) → Correct sentence?",
+        opts: ["She is cook going to dinner tonight.", "She is going to cook dinner tonight.", "Is she going to cook dinner tonight?", "She going is to cook dinner tonight."],
+        ans: 1,
+        hint: "Subject + is + going to + base verb + object."
+      },
+      {
+        q: "Which 'going to' sentence matches 'She isn't going to buy the new phone'?",
+        opts: ["She won't buy the new phone.", "She can't buy the new phone.", "She is going to not buy the new phone.", "She doesn't buy the new phone."],
+        ans: 0,
+        hint: "'Won't' and 'isn't going to' can express the same lack of intention."
+      },
+      {
+        q: "Which subject requires 'IS going to'?",
+        opts: ["We", "They", "He", "I"],
+        ans: 2,
+        hint: "He/She/It → is. I → am. We/You/They → are."
+      },
+      {
+        q: "The 'going to' future uses which be-verb with 'I'?",
+        opts: ["is", "are", "was", "am"],
+        ans: 3,
+        hint: "I + am → 'I am going to...'"
+      },
+    ]
+  },
+
+  /* ── CH 3: Future Continuous ── */
+  {
+    chLabel: "Chapter 3",
+    title: "Future Continuous Tense",
+    questions: [
+      {
+        q: "What is the correct structure for the Future Continuous Tense?",
+        opts: ["Subject + will + verb-ing", "Subject + will be + base verb + -ing", "Subject + is + will + verb-ing", "Subject + will have + verb-ing"],
+        ans: 1,
+        hint: "'Will be' + the -ing form of the main verb."
+      },
+      {
+        q: "Which sentence correctly uses the Future Continuous Tense?",
+        opts: ["I will studying at this time tomorrow.", "I will be study at this time tomorrow.", "I will be studying at this time tomorrow.", "I will studied at this time tomorrow."],
+        ans: 2,
+        hint: "will be + verb-ing."
+      },
+      {
+        q: "The Future Continuous describes actions that ___.",
+        opts: ["Were completed in the past", "Will be in progress at a specific future time", "Were happening yesterday", "Started yesterday and finished today"],
+        ans: 1,
+        hint: "Think: 'At 8 PM tomorrow, I WILL BE doing something.'"
+      },
+      {
+        q: "Which time expression is typical for the Future Continuous?",
+        opts: ["Yesterday evening", "Last week", "At this time tomorrow", "Two years ago"],
+        ans: 2,
+        hint: "The Future Continuous pinpoints a moment in the future when the action is ongoing."
+      },
+      {
+        q: "How do you form a question in the Future Continuous?",
+        opts: ["Subject + will + be + verb-ing?", "Will + subject + be + verb-ing?", "Will + subject + verb-ing?", "Be + subject + will + verb-ing?"],
+        ans: 1,
+        hint: "Will comes first in the question, then subject, then be, then verb-ing."
+      },
+      {
+        q: "Which negative Future Continuous sentence is correct?",
+        opts: ["She won't be watching TV when you arrive.", "She will not watching TV when you arrive.", "She not will be watching TV.", "She won't watching TV when you arrive."],
+        ans: 0,
+        hint: "Subject + will not (won't) + be + verb-ing."
+      },
+      {
+        q: "Choose the best Future Continuous use: telling what you'll be doing WHILE something else happens.",
+        opts: ["While I will be studying, my brother will be playing video games.", "While I study, my brother plays video games.", "While I studied, my brother played video games.", "While I am studying, my brother is playing video games."],
+        ans: 0,
+        hint: "Two parallel future ongoing actions = Future Continuous for both."
+      },
+      {
+        q: "Rearrange: (She / tomorrow / be / will / jogging / in the park) → Correct?",
+        opts: ["She will jogging be tomorrow in the park.", "She will be jogging in the park tomorrow.", "Tomorrow she jogging will be in the park.", "Will she be jogging in the park tomorrow?"],
+        ans: 1,
+        hint: "Subject + will be + verb-ing + place + time."
+      },
+      {
+        q: "Complete: 'Next summer, they ___ across Europe.'",
+        opts: ["will travel", "will have traveled", "will be traveling", "are going to travel"],
+        ans: 2,
+        hint: "Ongoing travel prediction at a future time → Future Continuous."
+      },
+      {
+        q: "Which sentence uses the Future Continuous to make a POLITE question about plans?",
+        opts: ["Are you going to use the computer?", "Did you use the computer?", "Will you be using the computer this evening?", "Do you use the computer?"],
+        ans: 2,
+        hint: "Polite future questions about someone's plans use 'Will you be + -ing?'"
+      },
+      {
+        q: "Transform to negative: 'They will be attending the meeting tomorrow.'",
+        opts: ["They won't be attending the meeting tomorrow.", "They will not attending the meeting tomorrow.", "They won't attending the meeting tomorrow.", "They will be not attending the meeting tomorrow."],
+        ans: 0,
+        hint: "Subject + won't + be + verb-ing."
+      },
+      {
+        q: "Which is the -ing form of 'jog'?",
+        opts: ["joging", "jogged", "jogs", "jogging"],
+        ans: 3,
+        hint: "Single vowel + consonant → double the consonant before -ing."
+      },
+    ]
+  },
+
+  /* ── CH 4: Future Perfect ── */
+  {
+    chLabel: "Chapter 4",
+    title: "Future Perfect Tense",
+    questions: [
+      {
+        q: "What is the correct structure for the Future Perfect Tense?",
+        opts: ["Subject + will + past participle", "Subject + will have + past participle", "Subject + have will + past participle", "Subject + will be + past participle"],
+        ans: 1,
+        hint: "'Will have' + past participle (3rd form of the verb)."
+      },
+      {
+        q: "Which sentence correctly uses the Future Perfect?",
+        opts: ["I will have finish my homework by 8 p.m.", "I will have finished my homework by 8 p.m.", "I will finished my homework by 8 p.m.", "I have will finished my homework by 8 p.m."],
+        ans: 1,
+        hint: "will have + past participle ('finished' not 'finish')."
+      },
+      {
+        q: "The Future Perfect Tense is used to describe actions that ___.",
+        opts: ["Will be in progress at a future time", "Were completed in the past", "Will be completed by a certain time in the future", "Are happening right now"],
+        ans: 2,
+        hint: "Think: 'By 6 PM, I will HAVE done it — it'll be finished.'"
+      },
+      {
+        q: "Which time expression is most typical for the Future Perfect?",
+        opts: ["Yesterday", "At this moment", "By next week", "Since 2010"],
+        ans: 2,
+        hint: "'By' + a future time point → Future Perfect."
+      },
+      {
+        q: "How do you form a question in the Future Perfect?",
+        opts: ["Have + subject + will + past participle?", "Will + subject + have + past participle?", "Subject + will + have + past participle?", "Will + subject + past participle?"],
+        ans: 1,
+        hint: "Will + subject + have + past participle?"
+      },
+      {
+        q: "Which negative Future Perfect sentence is correct?",
+        opts: ["She won't have arrived by 6 p.m.", "She will not arrived by 6 p.m.", "She won't arriving by 6 p.m.", "She will have not arrived by 6 p.m."],
+        ans: 0,
+        hint: "Subject + won't have + past participle."
+      },
+      {
+        q: "Choose the correct short answer: 'Will she have finished the task by noon?' — ___",
+        opts: ["Yes, she is.", "Yes, she will.", "Yes, she has.", "Yes, she does."],
+        ans: 1,
+        hint: "The short answer echoes 'will': Yes, she will."
+      },
+      {
+        q: "Rearrange: (She / will / have / completed / her homework / by tomorrow) → Correct?",
+        opts: ["She have will completed her homework by tomorrow.", "By tomorrow she completed will have her homework.", "She will have completed her homework by tomorrow.", "Will she have completed her homework by tomorrow?"],
+        ans: 2,
+        hint: "Subject + will have + past participle + object + time phrase."
+      },
+      {
+        q: "Complete: 'By December, she ___ here for five years.'",
+        opts: ["will work", "will be working", "will have worked", "has worked"],
+        ans: 2,
+        hint: "Completed duration up to a future point → Future Perfect."
+      },
+      {
+        q: "The word 'before' in 'They will have left before you arrive' signals which tense?",
+        opts: ["Future Continuous", "Simple Future", "Future Perfect Continuous", "Future Perfect"],
+        ans: 3,
+        hint: "Completion before another future event → Future Perfect."
+      },
+      {
+        q: "Transform to negative: 'He will have visited London next week.'",
+        opts: ["He will not have visited London next week.", "He won't visited London next week.", "He will have not visited London next week.", "He not will have visited London next week."],
+        ans: 0,
+        hint: "Subject + will not have + past participle."
+      },
+      {
+        q: "Which sentence correctly uses the Future Perfect to show duration?",
+        opts: ["By December, she will have worked here for five years.", "By December, she is working here for five years.", "By December, she will be working here since five years.", "By December, she works here for five years."],
+        ans: 0,
+        hint: "'By [time], subject will have + past participle + for [duration].'"
+      },
+    ]
+  },
+
+  /* ── CH 5: Future Perfect Continuous ── */
+  {
+    chLabel: "Chapter 5",
+    title: "Future Perfect Continuous Tense",
+    questions: [
+      {
+        q: "What is the correct structure for the Future Perfect Continuous Tense?",
+        opts: ["Subject + will have + verb-ing", "Subject + will be + verb-ing", "Subject + will have been + verb-ing", "Subject + will have been + past participle"],
+        ans: 2,
+        hint: "'Will have been' + verb-ing = Future Perfect Continuous."
+      },
+      {
+        q: "Which sentence correctly uses the Future Perfect Continuous?",
+        opts: ["By next April, she will work here for five years.", "By next April, she will have been working here for five years.", "By next April, she will be working here for five years.", "By next April, she has worked here for five years."],
+        ans: 1,
+        hint: "will have been + verb-ing to show duration up to a future point."
+      },
+      {
+        q: "The Future Perfect Continuous Tense highlights ___.",
+        opts: ["A completed past action", "The duration of an ongoing future action", "A sudden future decision", "A prediction with no time reference"],
+        ans: 1,
+        hint: "Think: HOW LONG something will have been happening."
+      },
+      {
+        q: "Which time expression pair is most typical for the Future Perfect Continuous?",
+        opts: ["Yesterday / last year", "Tomorrow / next week (simple)", "By [time] / for [duration]", "Since / already"],
+        ans: 2,
+        hint: "'By the time…' and 'for three hours' are the classic markers."
+      },
+      {
+        q: "How do you form a question in the Future Perfect Continuous?",
+        opts: ["Will + subject + been + verb-ing?", "Will + subject + have been + verb-ing?", "Have + subject + will been + verb-ing?", "Subject + will + have been + verb-ing?"],
+        ans: 1,
+        hint: "Will + subject + have been + verb-ing?"
+      },
+      {
+        q: "Which negative sentence is correct?",
+        opts: ["I won't have been waiting long when you arrive.", "I will not been waiting long when you arrive.", "I won't been waiting long when you arrive.", "I will have not been waiting long when you arrive."],
+        ans: 0,
+        hint: "Subject + won't have been + verb-ing."
+      },
+      {
+        q: "Complete: 'By the time you get home, I ___ cooking for three hours.'",
+        opts: ["will cook", "will have cooked", "will be cooking", "will have been cooking"],
+        ans: 3,
+        hint: "Ongoing action up to a future point, with a duration → Future Perfect Continuous."
+      },
+      {
+        q: "Rearrange: (next month / she / have / been / working / will / at the company / for five years / by) → Correct?",
+        opts: ["She will have been working at the company for five years by next month.", "She have will been working at the company by next month for five years.", "By next month she been working will have at the company for five years.", "She will working have been at the company for five years next month."],
+        ans: 0,
+        hint: "Subject + will have been + verb-ing + place + for [duration] + by [time]."
+      },
+      {
+        q: "Identify the Future Perfect Continuous sentence:",
+        opts: ["By evening, he will be finishing his report.", "By evening, he will have finished his report.", "By evening, he will have been finishing his report for hours.", "By evening, he is going to finish his report."],
+        ans: 2,
+        hint: "will have been + verb-ing + for [duration] = Future Perfect Continuous."
+      },
+      {
+        q: "Transform to negative: 'She will have been studying for exams for three months by then.'",
+        opts: ["She will not have been studying for exams for three months by then.", "She won't been studying for exams for three months by then.", "She will have not been studying for exams for three months by then.", "She not will have been studying for exams for three months by then."],
+        ans: 0,
+        hint: "Subject + will not have been + verb-ing + rest of sentence."
+      },
+      {
+        q: "Which sentence correctly explains cause using the Future Perfect Continuous?",
+        opts: ["By evening, they will have been running for hours, so they will be tired.", "By evening, they ran for hours so they are tired.", "By evening, they will run so they are tired.", "By evening, they are going to run so they will tired."],
+        ans: 0,
+        hint: "FPC explains WHY something will be true by pointing to a long ongoing action."
+      },
+      {
+        q: "Which pair shows Future Perfect vs Future Perfect Continuous correctly?",
+        opts: [
+          "FP: She will have completed it. / FPC: She will have been completing it for hours.",
+          "FP: She will complete it. / FPC: She will have completed it.",
+          "FP: She will be completing it. / FPC: She will have completed it.",
+          "FP: She will complete it. / FPC: She will be completing it."
+        ],
+        ans: 0,
+        hint: "FP = completed; FPC = ongoing for a duration up to a future moment."
+      },
+    ]
+  },
+
+  /* ── MASTERY TEST ── */
+  {
+    chLabel: "Mastery Test",
+    title: "All Future Tenses",
+    questions: [
+      {
+        q: "Identify the tense: 'I will be cooking dinner when you get home.'",
+        opts: ["Simple Future", "Future Continuous", "Future Perfect", "Future Perfect Continuous"],
+        ans: 1,
+        hint: "An action IN PROGRESS at a specific future moment."
+      },
+      {
+        q: "Identify the tense: 'By tomorrow morning, they will have cleaned the entire house.'",
+        opts: ["Future Continuous", "Going to Future", "Future Perfect", "Future Perfect Continuous"],
+        ans: 2,
+        hint: "Completed BEFORE a future time → Future Perfect."
+      },
+      {
+        q: "Identify the tense: 'I am going to start a new job next month.'",
+        opts: ["Simple Future", "Future Continuous", "Going to Future", "Future Perfect"],
+        ans: 2,
+        hint: "Already decided plan with am/is/are + going to."
+      },
+      {
+        q: "Identify the tense: 'They will have been studying for hours by the time the teacher arrives.'",
+        opts: ["Future Perfect", "Future Continuous", "Simple Future", "Future Perfect Continuous"],
+        ans: 3,
+        hint: "Duration of an ongoing action up to a future point."
+      },
+      {
+        q: "Fill in: 'At this time tomorrow, she ___ on the beach.' (relax — Future Continuous)",
+        opts: ["will relax", "will be relaxing", "will have relaxed", "is going to relax"],
+        ans: 1,
+        hint: "At this time tomorrow = ongoing → will be + verb-ing."
+      },
+      {
+        q: "Fill in: 'By 8 p.m. tonight, they ___ the project.' (complete — Future Perfect)",
+        opts: ["will complete", "will be completing", "will have completed", "are going to complete"],
+        ans: 2,
+        hint: "By + time → Future Perfect: will have + past participle."
+      },
+      {
+        q: "Multiple Choice: 'By this time next year, they ___ the new project.'",
+        opts: ["are going to complete", "completed", "will have completed", "will be completing"],
+        ans: 2,
+        hint: "Completed by a future point = Future Perfect."
+      },
+      {
+        q: "Multiple Choice: 'At this time tomorrow, we ___ to the museum.'",
+        opts: ["are going to visit", "visited", "will be visiting", "will have visited"],
+        ans: 2,
+        hint: "Ongoing action at a specific future time = Future Continuous."
+      },
+      {
+        q: "Multiple Choice: 'By the end of this week, I ___ my degree for three years.'",
+        opts: ["am going to study", "studied", "will have been studying", "will be studying"],
+        ans: 2,
+        hint: "Duration of ongoing action up to a future time = Future Perfect Continuous."
+      },
+      {
+        q: "Correct the mistake: 'She will been working there for five years by next year.'",
+        opts: ["She will been worked there for five years by next year.", "She will have been working there for five years by next year.", "She will was working there for five years by next year.", "She been working there for five years by next year."],
+        ans: 1,
+        hint: "Future Perfect Continuous = will have been + verb-ing."
+      },
+      {
+        q: "Correct the mistake: 'He going to visit his grandparents next weekend.'",
+        opts: ["He will going to visit his grandparents next weekend.", "He is going to visit his grandparents next weekend.", "He going visit his grandparents next weekend.", "He is going visit his grandparents next weekend."],
+        ans: 1,
+        hint: "Going to future requires am/is/are before 'going to'."
+      },
+      {
+        q: "Match the tense: 'He will teach us the new lesson tomorrow.'",
+        opts: ["Future Continuous", "Future Perfect", "Simple Future", "Going to Future"],
+        ans: 2,
+        hint: "Prediction or decision with 'will' + base verb = Simple Future."
+      },
+      {
+        q: "Match the tense: 'She is going to visit her grandparents this weekend.'",
+        opts: ["Simple Future", "Future Continuous", "Future Perfect", "Going to Future"],
+        ans: 3,
+        hint: "am/is/are + going to = Going to Future."
+      },
+      {
+        q: "Rewrite in the Future Continuous: 'He will complete the report soon.'",
+        opts: ["He will have completed the report soon.", "He will be completing the report soon.", "He is going to complete the report soon.", "He will completed the report soon."],
+        ans: 1,
+        hint: "Future Continuous = will be + verb-ing."
+      },
+      {
+        q: "Which sentence uses ALL elements correctly to talk about duration up to a future point?",
+        opts: [
+          "By next month, I will save enough money.",
+          "By next month, I will have been saving enough money.",
+          "By next month, I will have been saving for three months.",
+          "By next month, I will be saving money."
+        ],
+        ans: 2,
+        hint: "Future Perfect Continuous = will have been + verb-ing + for [duration]."
+      },
+    ]
+  }
+
+];
+
+/* ═══════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════ */
+let currentSection = 0;
+let shuffledQuestions = [];
+let currentQ = 0;
+let pts = 0, correct = 0, wrong = 0;
+let hintUsed = false;
+let answered = false;
+let wrongItems = []; // {q, yourAns, correctAns}
+
+/* ═══════════════════════════════════════════════════════
+   UTILS
+═══════════════════════════════════════════════════════ */
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function pct() {
+  const total = correct + wrong;
+  return total === 0 ? 0 : Math.round(correct / total * 100);
+}
+
+/* ═══════════════════════════════════════════════════════
+   FLOW
+═══════════════════════════════════════════════════════ */
+function startSection(idx) {
+  currentSection = idx;
+  pts = 0; correct = 0; wrong = 0;
+  wrongItems = [];
+  const sec = SECTIONS[idx];
+
+  // Shuffle questions; shuffle option positions
+  shuffledQuestions = shuffle(sec.questions).map(q => {
+    const indexed = q.opts.map((o, i) => ({ text: o, origIdx: i }));
+    const shuffledOpts = shuffle(indexed);
+    const newAns = shuffledOpts.findIndex(o => o.origIdx === q.ans);
+    return { q: q.q, opts: shuffledOpts.map(o => o.text), ans: newAns, hint: q.hint };
+  });
+
+  currentQ = 0;
+  document.getElementById('menu').style.display = 'none';
+  document.getElementById('end-screen').style.display = 'none';
+  document.getElementById('quiz-screen').style.display = 'block';
+  document.getElementById('ch-name-label').textContent = sec.chLabel;
+  document.getElementById('ch-title-label').textContent = sec.title;
+
+  renderQuestion();
+}
+
+function renderQuestion() {
+  answered = false;
+  hintUsed = false;
+  const total = shuffledQuestions.length;
+  const q = shuffledQuestions[currentQ];
+
+  document.getElementById('progress-fill').style.width = ((currentQ / total) * 100) + '%';
+  document.getElementById('progress-text').textContent = `${currentQ + 1} / ${total}`;
+  document.getElementById('question-text').textContent = q.q;
+
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(i);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('feedback').style.display = 'none';
+  document.getElementById('hint-text').style.display = 'none';
+  document.getElementById('hint-btn').style.display = 'flex';
+  document.getElementById('hint-btn').disabled = false;
+  document.getElementById('next-btn').style.display = 'none';
+  document.getElementById('exit-btn').style.display = 'block';
+  updateStats();
+}
+
+function selectAnswer(idx) {
+  if (answered) return;
+  answered = true;
+  const q = shuffledQuestions[currentQ];
+  const isCorrect = idx === q.ans;
+  const buttons = document.querySelectorAll('.option-btn');
+
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.ans) btn.classList.add('correct');
+    else if (i === idx && !isCorrect) btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('feedback');
+  fb.style.display = 'block';
+  if (isCorrect) {
+    const earnedPts = hintUsed ? 5 : 10;
+    pts += earnedPts;
+    correct++;
+    fb.className = 'correct';
+    fb.textContent = hintUsed
+      ? `✅ Correct! +5 pts (hint used)`
+      : `✅ Correct! +10 pts`;
+  } else {
+    wrong++;
+    fb.className = 'wrong';
+    fb.textContent = `❌ Not quite. The correct answer is: "${q.opts[q.ans]}"`;
+    wrongItems.push({ q: q.q, yourAns: q.opts[idx], correctAns: q.opts[q.ans] });
+  }
+
+  document.getElementById('hint-btn').style.display = 'none';
+  document.getElementById('next-btn').style.display = 'block';
+  updateStats();
+}
+
+function showHint() {
+  hintUsed = true;
+  const q = shuffledQuestions[currentQ];
+  const ht = document.getElementById('hint-text');
+  ht.textContent = '💡 ' + q.hint;
+  ht.style.display = 'block';
+  document.getElementById('hint-btn').disabled = true;
+  document.getElementById('hint-btn').style.opacity = '.5';
+}
+
+function nextQuestion() {
+  currentQ++;
+  if (currentQ >= shuffledQuestions.length) {
+    showEndScreen();
+  } else {
+    renderQuestion();
+  }
+}
+
+function updateStats() {
+  document.getElementById('stat-pts').textContent = pts;
+  document.getElementById('stat-correct').textContent = correct;
+  document.getElementById('stat-wrong').textContent = wrong;
+  document.getElementById('stat-score').textContent = pct() + '%';
+}
+
+function exitToMenu() {
+  document.getElementById('quiz-screen').style.display = 'none';
+  document.getElementById('menu').style.display = 'block';
+}
+
+/* ═══════════════════════════════════════════════════════
+   END SCREEN
+═══════════════════════════════════════════════════════ */
+function showEndScreen() {
+  document.getElementById('quiz-screen').style.display = 'none';
+  const end = document.getElementById('end-screen');
+  end.style.display = 'block';
+
+  const p = pct();
+  const trophy = document.getElementById('end-trophy');
+  const starsRow = document.getElementById('stars-row');
+  const endTitle = document.getElementById('end-title');
+  const endSub = document.getElementById('end-subtitle');
+  const reviewSec = document.getElementById('review-section');
+
+  starsRow.innerHTML = '';
+
+  if (p >= 70) {
+    // Success path
+    let title, emoji;
+    if (p === 100) { title = '🏆 Spectacular!'; emoji = '🏆'; }
+    else if (p >= 85) { title = '⭐ Excellent!'; emoji = '🎉'; }
+    else { title = '🌟 Great Job!'; emoji = '😊'; }
+
+    trophy.textContent = emoji;
+    endTitle.textContent = title;
+    endSub.textContent = `You scored ${p}% — amazing work!`;
+
+    // 5 animated stars
+    for (let i = 0; i < 5; i++) {
+      const s = document.createElement('span');
+      s.className = 'star';
+      s.textContent = '⭐';
+      starsRow.appendChild(s);
+      setTimeout(() => s.classList.add('pop'), 200 + i * 180);
+    }
+
+    // Review wrong answers
+    if (wrongItems.length > 0) {
+      reviewSec.style.display = 'block';
+      const ri = document.getElementById('review-items');
+      ri.innerHTML = wrongItems.map(w => `
+        <div class="review-item wrong-item">
+          <div class="q-text">${w.q}</div>
+          <div class="your-ans">❌ Your answer: ${w.yourAns}</div>
+          <div class="correct-ans">✅ Correct: ${w.correctAns}</div>
+        </div>
+      `).join('');
+    } else {
+      reviewSec.style.display = 'none';
+    }
+
+  } else {
+    // Encouraging path
+    trophy.textContent = '💪';
+    endTitle.textContent = 'Keep Practising!';
+    endSub.textContent = `You scored ${p}%. You're making progress — try again!`;
+    starsRow.innerHTML = ''; // no stars
+    reviewSec.style.display = 'none';
+  }
+
+  // Pills
+  document.getElementById('pill-pts').textContent = `${pts} Points`;
+  document.getElementById('pill-correct').textContent = `✅ ${correct} Correct`;
+  document.getElementById('pill-wrong').textContent = `❌ ${wrong} Wrong`;
+  document.getElementById('pill-pct').textContent = `🎯 ${p}%`;
+
+  // Review box (Etsy / Amazon)
+  const params = new URLSearchParams(window.location.search);
+  const src = params.get('src');
+  const reviewBox = document.getElementById('review-box');
+  const reviewButtons = document.getElementById('review-buttons');
+  if (src === 'etsy') {
+    reviewBox.style.display = 'block';
+    reviewButtons.innerHTML = `<a href="https://www.etsy.com/your/purchases" target="_blank" class="review-btn">⭐ Review This Resource Bundle</a>`;
+  } else if (src === 'amazon') {
+    reviewBox.style.display = 'block';
+    reviewButtons.innerHTML = `
+      <a href="https://www.amazon.com/review/create-review?asin=B0DS8WYZRC" target="_blank" class="review-btn">⭐ Review Paperback on Amazon</a>
+      <a href="https://www.amazon.com/review/create-review?asin=B0F8VGPGX9" target="_blank" class="review-btn" style="margin-top:8px">⭐ Review Hardcover on Amazon</a>`;
+  } else {
+    reviewBox.style.display = 'none';
+  }
+}
+
+function retryCurrent() {
+  document.getElementById('end-screen').style.display = 'none';
+  document.getElementById('review-section').style.display = 'none';
+  startSection(currentSection);
+}
+
+function goMenu() {
+  document.getElementById('end-screen').style.display = 'none';
+  document.getElementById('menu').style.display = 'block';
+}
+</script>
+</body>
+</html>
